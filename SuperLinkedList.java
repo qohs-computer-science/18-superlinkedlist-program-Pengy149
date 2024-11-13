@@ -1,31 +1,101 @@
 import java.util.LinkedList;
-import java.util.Iterator;
+import java.util.ListIterator;
 
 public class SuperLinkedList extends LinkedList<String> {
+    private LinkedList <String> firstList = new LinkedList<String>();
+    private ListIterator <String> myIter;
+
+    public SuperLinkedList() {
+        firstList = null;
+    } // end default constructor  
+    
+    public SuperLinkedList(LinkedList<String> list1) {
+        firstList = list1;
+    } // end 1 parameter constructor  
+    
     public boolean removeVowels() {
-        return false;
-    }
+        myIter = firstList.listIterator();
+        String letter;
+        boolean removed = false;
+        while (myIter.hasNext()) {
+            letter = myIter.next();
+            if(letter.toLowerCase().equals("a") || letter.toLowerCase().equals("e") || letter.toLowerCase().equals("i") || letter.toLowerCase().equals("o") || letter.toLowerCase().equals("u")) {
+                myIter.remove();
+                removed = true;
+            } // end if statement 
+        } // end while loop 
+        return removed;
+    } // end removeVowels
 
     public boolean removeConsonants() {
-        return false;
-    }
+        boolean removed = false;
+        String letter;
+        myIter = firstList.listIterator();
+        while (myIter.hasNext()) {
+            letter = myIter.next();
+            if(!(letter.toLowerCase().equals("a") || letter.toLowerCase().equals("e") || letter.toLowerCase().equals("i") || letter.toLowerCase().equals("o") || letter.toLowerCase().equals("u"))) {
+                myIter.remove();
+                removed = true;
+            } // end if statement 
+        } // end while loop
+        return removed;
+    } // end removeConsonants 
 
     public LinkedList<String> removeDuplicates() {
-        return null;
-    }
+        LinkedList<String> dupList = new LinkedList<String>();
+        String firstLet = "";
+        String secLet = "";
+        myIter = firstList.listIterator();
+        ListIterator <String> innerIter = firstList.listIterator();
+        boolean exception;
+        while (myIter.hasNext()) {
+            firstLet = myIter.next();
+            innerIter = firstList.listIterator();
+            exception = true;
+            while(innerIter.hasNext()) {
+                secLet = innerIter.next();
+                if (firstLet.equals(secLet) == true && exception == true) 
+                    exception = false;
+                else if (firstLet.equals(secLet)) {
+                    innerIter.remove();
+                    dupList.add(secLet);
+                } // end else if statement 
+            } // end while loop 
+        } // end while loop
+        return dupList;
+    } // end removeDuplicates
 
     public LinkedList<String> concatenateStrings() {
-
-        return null;
-    }
+        LinkedList<String> retList = new LinkedList<String>(); 
+        String newEle = "";
+        myIter = firstList.listIterator();
+        while (myIter.hasNext()) {
+            newEle += myIter.next();
+            retList.add(newEle);
+        } // end while loop
+        return retList;
+    } // end concatenateStrings
 
     public LinkedList<String> mix(LinkedList<String> list2) {
-
-        return null;
-    }
+        LinkedList <String> combList = new LinkedList<String>(); 
+        myIter = firstList.listIterator();
+        ListIterator <String> secIter = list2.listIterator();
+        while (myIter.hasNext()) {
+            combList.add(myIter.next());
+            combList.add(secIter.next());
+        } // end while loop
+        return combList;
+    } // end mix
 
     public String toString() {
-
-        return "";
-    }
+        String returned = "";
+        String letter;
+        myIter = firstList.listIterator();
+        while (myIter.hasNext()) {
+            letter = myIter.next();
+            returned += letter + ", ";
+        } // end while loop 
+        return returned;
+    } // end toString
+    
 } // end SuperLinkedList
