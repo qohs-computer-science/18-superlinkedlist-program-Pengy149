@@ -19,7 +19,7 @@ class SLLTester {
     System.out.println("This is list1: ");
     System.out.println(list1.toString());
 
-    LinkedList<String> list2 = new LinkedList <String>();
+    SuperLinkedList list2 = new SuperLinkedList();
     list2.add("e");
     list2.add("d");
     list2.add("c");
@@ -28,7 +28,7 @@ class SLLTester {
     System.out.println("This is list2: ");
     System.out.println(list2.toString());
 
-    LinkedList<String> list3 = new LinkedList <String>();
+    SuperLinkedList list3 = new SuperLinkedList();
     list3.add("A");
     list3.add("D");
     list3.add("C");
@@ -46,6 +46,13 @@ class SLLTester {
     System.out.println(list2.toString());
     System.out.println("This is retLists, return value of the call to mix: ");
     System.out.println(list1.mix(list2));
+
+    System.out.println("Removed Vowels: " + "true");
+    LinkedList<String> dupeList = list3.removeDuplicates();
+    System.out.println("This is list3 after the removeDuplicates: " + list3);
+    System.out.println("Returned from removeDuplicates: " + dupeList);
+    list3.removeVowels();
+    System.out.println("This is list3 after the removeVowels: " + list3);
 
 
 

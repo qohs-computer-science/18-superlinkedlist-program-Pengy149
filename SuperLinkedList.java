@@ -2,19 +2,10 @@ import java.util.LinkedList;
 import java.util.ListIterator;
 
 public class SuperLinkedList extends LinkedList<String> {
-    private LinkedList <String> firstList = new LinkedList<String>();
     private ListIterator <String> myIter;
 
-    public SuperLinkedList() {
-        firstList = null;
-    } // end default constructor  
-    
-    public SuperLinkedList(LinkedList<String> list1) {
-        firstList = list1;
-    } // end 1 parameter constructor  
-    
     public boolean removeVowels() {
-        myIter = firstList.listIterator();
+        myIter = this.listIterator();
         String letter;
         boolean removed = false;
         while (myIter.hasNext()) {
@@ -30,7 +21,7 @@ public class SuperLinkedList extends LinkedList<String> {
     public boolean removeConsonants() {
         boolean removed = false;
         String letter;
-        myIter = firstList.listIterator();
+        myIter = this.listIterator();
         while (myIter.hasNext()) {
             letter = myIter.next();
             if(!(letter.toLowerCase().equals("a") || letter.toLowerCase().equals("e") || letter.toLowerCase().equals("i") || letter.toLowerCase().equals("o") || letter.toLowerCase().equals("u"))) {
@@ -45,12 +36,12 @@ public class SuperLinkedList extends LinkedList<String> {
         LinkedList<String> dupList = new LinkedList<String>();
         String firstLet = "";
         String secLet = "";
-        myIter = firstList.listIterator();
-        ListIterator <String> innerIter = firstList.listIterator();
+        myIter = this.listIterator();
+        ListIterator <String> innerIter = this.listIterator();
         boolean exception;
         while (myIter.hasNext()) {
             firstLet = myIter.next();
-            innerIter = firstList.listIterator();
+            innerIter = this.listIterator();
             exception = true;
             while(innerIter.hasNext()) {
                 secLet = innerIter.next();
@@ -68,7 +59,7 @@ public class SuperLinkedList extends LinkedList<String> {
     public LinkedList<String> concatenateStrings() {
         LinkedList<String> retList = new LinkedList<String>(); 
         String newEle = "";
-        myIter = firstList.listIterator();
+        myIter = this.listIterator();
         while (myIter.hasNext()) {
             newEle += myIter.next();
             retList.add(newEle);
@@ -78,7 +69,7 @@ public class SuperLinkedList extends LinkedList<String> {
 
     public LinkedList<String> mix(LinkedList<String> list2) {
         LinkedList <String> combList = new LinkedList<String>(); 
-        myIter = firstList.listIterator();
+        myIter = this.listIterator();
         ListIterator <String> secIter = list2.listIterator();
         while (myIter.hasNext()) {
             combList.add(myIter.next());
@@ -90,10 +81,15 @@ public class SuperLinkedList extends LinkedList<String> {
     public String toString() {
         String returned = "";
         String letter;
-        myIter = firstList.listIterator();
+        myIter = this.listIterator();
+        if(myIter.hasNext()) {
+            letter = myIter.next();
+            returned += letter;
+        } // end if statement 
+        
         while (myIter.hasNext()) {
             letter = myIter.next();
-            returned += letter + ", ";
+            returned += ", " + letter;
         } // end while loop 
         return returned;
     } // end toString
