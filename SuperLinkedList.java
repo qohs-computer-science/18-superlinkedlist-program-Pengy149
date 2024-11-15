@@ -1,4 +1,18 @@
+/*
+ * Name: Kevin Zheng 
+ * Date: 11/15/2024 
+ * Class Period: 3 
+ * File Name: SuperLinkedList.java 
+ * Program Description: This class acts as an extension to the LinkedList class. Adds 6 methods: removeVowels(removes all vowels in a LinkedList), 
+ * removeConsonants(removes all consonants(not vowels) in a LinkedList), removeDuplicates(ensures only unqiue values in a LinkedList), 
+ * concatenateStrings(each following element in a LinkedList has the corresponding element's letter added to the String), mix(combines two LinkedLists), 
+ * and toString(displays the SuperLinkedList in a list form (Ex. a, b, c)) 
+ */
+
+// LinkedList is imported to be able to store multiple letters and as a base for the SuperLinkedList Class 
 import java.util.LinkedList;
+
+// ListIterator is imported to be able to go through LinkedLists and help modify LinkedLists 
 import java.util.ListIterator;
 
 public class SuperLinkedList extends LinkedList<String> {
@@ -34,25 +48,25 @@ public class SuperLinkedList extends LinkedList<String> {
 
     public LinkedList<String> removeDuplicates() {
         LinkedList<String> dupList = new LinkedList<String>();
-        String firstLet = "";
-        String secLet = "";
-        myIter = this.listIterator();
-        ListIterator <String> innerIter = this.listIterator();
+        String letter = "";
         boolean exception;
-        while (myIter.hasNext()) {
-            firstLet = myIter.next();
-            innerIter = this.listIterator();
+        String temp;
+        for (int i = 0; i < this.size(); i++) {
+            letter = this.get(i);
             exception = true;
-            while(innerIter.hasNext()) {
-                secLet = innerIter.next();
-                if (firstLet.equals(secLet) == true && exception == true) 
-                    exception = false;
-                else if (firstLet.equals(secLet)) {
-                    innerIter.remove();
-                    dupList.add(secLet);
-                } // end else if statement 
-            } // end while loop 
-        } // end while loop
+            myIter = this.listIterator();
+            while (myIter.hasNext()) {
+                temp = myIter.next();
+                if(letter.equals(temp)) {
+                    if(exception)
+                        exception = false;
+                    else {
+                        dupList.addFirst(letter);
+                        myIter.remove();
+                    } // end else statement 
+                } // end if statement 
+            } // end if statement 
+        } // end for loop 
         return dupList;
     } // end removeDuplicates
 
